@@ -3,34 +3,31 @@
 <xsl:output method="text" omit-xml-declaration="yes" indent="no"/>
 <xsl:template match="city">
 <xsl:variable name="city_id" select="@id" />
+
+
 <xsl:for-each select="pfr">
 <xsl:variable name="login_name" select="@id" />
 
 <xsl:param name="for_day">
-
 <xsl:value-of select="@for_day"/>
 <xsl:text>unknown_day</xsl:text>
 </xsl:param>
 
 
 
-<xsl:variable name="device_id" >
-<xsl:for-each select="devices">
+<xsl:for-each select = "devices">
+<xsl:for-each select = "*">
+<xsl:variable name="device_id_new" select="@id" />
+<xsl:variable name="device_id" select="@oldId" />
+<xsl:variable name="reliable" select="@reliable" />
 
-
-<xsl:for-each select="*">
-<xsl:value-of select="@id"/>
-
-
-<xsl:variable name="dev_http_visits_cnt" >
+<xsl:variable name="dev_http_visit_cnt" >
 <xsl:for-each select="p">
 <xsl:if test="@id = 'http_visits_cnt'">
 <xsl:value-of select="@v"/>
 </xsl:if>
 </xsl:for-each>
 </xsl:variable>
-
-
 
 <xsl:variable name="dev_vk_cnt" >
 <xsl:for-each select="p">
@@ -40,7 +37,6 @@
 </xsl:for-each>
 </xsl:variable>
 
-
 <xsl:variable name="dev_mail_ru_cnt" >
 <xsl:for-each select="p">
 <xsl:if test="@id = 'mail_ru_cnt'">
@@ -48,6 +44,7 @@
 </xsl:if>
 </xsl:for-each>
 </xsl:variable>
+
 
 <xsl:variable name="dev_top_5_sites" >
 <xsl:for-each select="p">
@@ -58,11 +55,9 @@
 </xsl:variable>
 
 
-
-
 <xsl:variable name="dev_model" >
 <xsl:for-each select="info">
-<xsl:for-each select = "*">
+<xsl:for-each select="p">
 <xsl:if test="@id = 'model'">
 <xsl:value-of select="@v"/>
 </xsl:if>
@@ -70,10 +65,9 @@
 </xsl:for-each>
 </xsl:variable>
 
-
 <xsl:variable name="dev_ua" >
 <xsl:for-each select="info">
-<xsl:for-each select = "*">
+<xsl:for-each select="p">
 <xsl:if test="@id = 'ua'">
 <xsl:value-of select="@v"/>
 </xsl:if>
@@ -81,11 +75,9 @@
 </xsl:for-each>
 </xsl:variable>
 
-
-
 <xsl:variable name="dev_ua_ver" >
 <xsl:for-each select="info">
-<xsl:for-each select = "*">
+<xsl:for-each select="p">
 <xsl:if test="@id = 'ua_ver'">
 <xsl:value-of select="@v"/>
 </xsl:if>
@@ -93,10 +85,9 @@
 </xsl:for-each>
 </xsl:variable>
 
-
 <xsl:variable name="dev_os" >
 <xsl:for-each select="info">
-<xsl:for-each select = "*">
+<xsl:for-each select="p">
 <xsl:if test="@id = 'os'">
 <xsl:value-of select="@v"/>
 </xsl:if>
@@ -107,7 +98,7 @@
 
 <xsl:variable name="dev_os_ver" >
 <xsl:for-each select="info">
-<xsl:for-each select = "*">
+<xsl:for-each select="p">
 <xsl:if test="@id = 'os_ver'">
 <xsl:value-of select="@v"/>
 </xsl:if>
@@ -116,12 +107,14 @@
 </xsl:variable>
 
 
-</xsl:for-each>
+
+
+
 <xsl:value-of select="concat($city_id,
 ';',$login_name,
 ';',$for_day,
 ';',$device_id,
-';',$dev_http_visits_cnt
+';',$dev_http_visit_cnt,
 ';',$dev_vk_cnt,
 ';',$dev_mail_ru_cnt,
 ';',$dev_top_5_sites,
@@ -130,9 +123,11 @@
 ';',$dev_ua_ver,
 ';',$dev_os,
 ';',$dev_os_ver,
+';',$device_id_new,
+';',$reliable,
 '&#xA;')"/>
 </xsl:for-each>
-</xsl:variable>
+</xsl:for-each>
 </xsl:for-each>
 </xsl:template>
 </xsl:stylesheet>
