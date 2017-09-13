@@ -10,7 +10,11 @@
       <app.main.class>com.test.core.paintshop.BatchMaker</app.main.class>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
       <scala.version>2.10.4</scala.version>
-
+      <spark.core.version>1.6.2</spark.core.version>
+      <slf4j.version>1.7.5</slf4j.version>
+      <guava.version>13.0.1</guava.version>
+      <gson.version>2.2.4</gson.version>
+      <hadoop.version>2.6.0</hadoop.version>
         </properties>
    <repositories>
       
@@ -29,25 +33,19 @@
       </pluginRepository>
    </pluginRepositories>
    <dependencies>
-      
-      
+
       <dependency>
          <groupId>org.scalatest</groupId>
          <artifactId>scalatest_2.10</artifactId>
          <version>2.2.4</version>
       </dependency>
-      
-      
-      
-      
-      <dependency>
-         <groupId>org.scala-lang</groupId>
-         <artifactId>scala-library</artifactId>
-         <version>${scala.version}</version>
-      </dependency>
-      
-      
-      
+
+       <dependency>
+           <groupId>org.apache.spark</groupId>
+           <artifactId>spark-sql_2.10</artifactId>
+           <version>1.6.2</version>
+       </dependency>
+
    </dependencies>
    <build>
       <pluginManagement>
