@@ -12,40 +12,25 @@
 </xsl:param>
 
 
-<xsl:variable name="game" >
-<xsl:for-each select="games">
-<xsl:for-each select="*">
-<xsl:value-of select="@id"/>
-<xsl:if test="starsts-with(@id,'g_')">
-<xsl:variable name="val" >
-<xsl:value-of select="@v"/>
-</xsl:variable>
-</xsl:if>
-</xsl:for-each>
-</xsl:for-each>
-</xsl:variable>
+<xsl:for-each select = "games">
+<xsl:for-each select = "*">  //берём каждую игру
+<xsl:variable name="game_id" select="@id" />
+<xsl:for-each select = "*"> //и начинаем перебирать все остальные и сравнивать с нею
 
 
 
-<xsl:variable name="gameMap" as="map(xs:string, xs:string)">
-      <map>
-         <entry key="val" value="Monday"/>
-         <entry key="time" value="Tuesday"/>
-         <entry key="dl" value="Wednesday"/>
-      </map>
-   </xsl:variable>
-
-
-
-
+<xsl:variable name="stuff" select="@v" />
 <xsl:value-of select="concat($city_id,
 ';',$login_name,
 ';',$for_day,
-';',$game,
-';',$stuff_val,
-';',$stuff_time,
-';',$stuff_dl,
-'&#xA;')"/>
+';',$game_id,
+';',$stuff,
+';','&#xA;')"/>
+</xsl:for-each>
+</xsl:for-each>
+
+
+
 </xsl:for-each>
 </xsl:template>
 </xsl:stylesheet>
